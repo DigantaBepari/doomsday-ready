@@ -1,3 +1,4 @@
+
 # Doomsday Ready
 
 Backend starter for a Marvel Cinematic Universe rewatch planner and cinema watch-party app. The current API includes movie management and health checks. Cinema endpoints, frontend work, rewatch ordering, and prerequisite cycle detection are intentionally deferred.
