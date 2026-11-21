@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["backend/src/**/*.ts", "backend/tests/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
