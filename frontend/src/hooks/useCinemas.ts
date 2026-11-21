@@ -42,5 +42,5 @@ export const useCinemas = () => {
     }
   };
 
-  return { cinemas, loading, saving, error, clearError: () => setError(null), loadCinemas, createCinema };
+  return { cinemas, loading, saving, error, createCinema };
 };

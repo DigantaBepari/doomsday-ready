@@ -40,6 +40,5 @@ export const useRewatchOrder = (targetId: number | null) => {
     }
   }, []);
 
-  const refresh = useCallback(() => setRevision((value) => value + 1), []);
-  return { rewatchOrder, loading, error, toggleWatched, refresh };
+  return { rewatchOrder, loading, error, toggleWatched };
 };
