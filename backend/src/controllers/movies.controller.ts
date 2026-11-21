@@ -22,4 +22,14 @@ export const createMoviesController = (movies: MoviesService) => ({
       res.json(movies.update(id, req.body));
     } catch (error) { next(error); }
   }) satisfies RequestHandler,
+  getRewatchOrder: ((req, res, next) => {
+    try {
+      const id = Number(req.params.id);
+      if (!Number.isSafeInteger(id) || id < 1) {
+        res.status(400).json({ error: { code: "INVALID_ID", message: "Movie id must be a positive integer" } });
+        return;
+      }
+      res.json(movies.getMovieRewatchOrder(id));
+    } catch (error) { next(error); }
+  }) satisfies RequestHandler,
 });

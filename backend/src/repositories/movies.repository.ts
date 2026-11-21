@@ -1,4 +1,5 @@
 import type { Database } from "better-sqlite3";
+import type { PrerequisiteGraph } from "../algorithms/graph.js";
 import type { CreateMovieInput, Movie, UpdateMovieInput } from "../types/movie.js";
 
 interface MovieRow {
@@ -25,6 +26,28 @@ export class MoviesRepository {
   findByTitle(title: string): Movie | undefined {
     const row = this.database.prepare("SELECT * FROM movies WHERE title = ? COLLATE NOCASE").get(title) as MovieRow | undefined;
     return row ? this.toMovie(row) : undefined;
+  }
+
+  getPrerequisiteGraph(): Map<number, number[]> {
+    const graph = new Map<number, number[]>();
+    const movieRows = this.database.prepare("SELECT id FROM movies").all() as Array<{ id: number }>;
+    for (const row of movieRows) graph.set(row.id, []);
+
+    const edges = this.database.prepare(
+      "SELECT movie_id, prerequisite_id FROM movie_prerequisites ORDER BY movie_id, prerequisite_id",
+    ).all() as Array<{ movie_id: number; prerequisite_id: number }>;
+    for (const edge of edges) graph.get(edge.movie_id)?.push(edge.prerequisite_id);
+    return graph satisfies PrerequisiteGraph;
+  }
+
+  nextMovieId(): number {
+    const row = this.database.prepare(`
+      SELECT MAX(
+        COALESCE((SELECT seq FROM sqlite_sequence WHERE name = 'movies'), 0),
+        COALESCE((SELECT MAX(id) FROM movies), 0)
+      ) + 1 AS id
+    `).get() as { id: number };
+    return row.id;
   }
 
   prerequisitesExist(ids: number[]): boolean {

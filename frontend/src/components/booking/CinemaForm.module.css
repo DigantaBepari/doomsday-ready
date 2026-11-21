@@ -1,0 +1,13 @@
+.card { height: fit-content; }
+.heading { margin-bottom: 18px; }
+.kicker { color: var(--accent); font-size: .63rem; font-weight: 700; letter-spacing: .13em; }
+.heading h2 { margin: 6px 0 5px; font-family: "Space Grotesk", sans-serif; font-size: 1.24rem; }
+.heading p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+.form { display: grid; gap: 13px; }
+.field { display: grid; gap: 7px; color: #d9d9dc; font-size: .8rem; font-weight: 600; }
+.field span { color: var(--muted); font-size: .6rem; font-weight: 400; letter-spacing: .07em; }
+.field input { width: 100%; min-width: 0; height: 43px; border: 1px solid var(--line); border-radius: 10px; padding: 0 11px; color: var(--text); background: #12141a; outline: none; }
+.field input:focus { border-color: var(--accent); }
+.field input::placeholder { color: #656a77; }
+.hint, .validation { margin: -4px 0 0; color: var(--muted); font-size: .69rem; line-height: 1.4; }
+.validation { color: var(--danger); }

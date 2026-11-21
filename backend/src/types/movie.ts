@@ -16,3 +16,11 @@ export interface CreateMovieInput {
 }
 
 export type UpdateMovieInput = Partial<CreateMovieInput>;
+
+export interface RewatchOrder {
+  target: Pick<Movie, "id" | "title">;
+  order: Movie[];
+  watchedCount: number;
+  totalCount: number;
+  remainingRuntimeMinutes: number;
+}

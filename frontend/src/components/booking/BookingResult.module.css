@@ -1,0 +1,23 @@
+.result, .empty { min-height: 232px; }
+.empty { display: grid; justify-items: center; align-content: center; text-align: center; }
+.orbit { color: var(--accent); font-size: 1.65rem; }
+.empty strong { margin-top: 10px; font-family: "Space Grotesk", sans-serif; }
+.empty p { max-width: 270px; margin: 6px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.5; }
+.result { position: relative; overflow: hidden; }
+.result::after { position: absolute; top: -80px; right: -70px; width: 190px; height: 190px; border: 1px solid #ffffff09; border-radius: 50%; content: ""; box-shadow: 0 0 0 22px #ffffff04, 0 0 0 46px #ffffff03; pointer-events: none; }
+.possible { background: radial-gradient(ellipse at 100% 0, #58bf8f19, transparent 55%), var(--surface); }
+.impossible { background: radial-gradient(ellipse at 100% 0, #e2675b1c, transparent 55%), var(--surface); }
+.topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.kicker { color: var(--accent); font-size: .64rem; font-weight: 700; letter-spacing: .13em; }
+.yes { border: 1px solid #438966; border-radius: 20px; padding: 5px 9px; color: var(--success); font-size: .58rem; letter-spacing: .08em; }
+.result h2 { position: relative; z-index: 1; margin: 18px 0 4px; font-family: "Space Grotesk", sans-serif; font-size: 1.55rem; }
+.subtitle { margin: 0; color: var(--muted); font-size: .83rem; }
+.breakdown { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; }
+.bundle { display: flex; align-items: baseline; gap: 7px; border: 1px solid #424650; border-radius: 12px; padding: 10px 12px; color: #d8d9df; font-size: .85rem; }
+.bundle strong { color: var(--accent-bright); font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; }
+.bundle i { color: var(--muted); font-style: normal; }
+.bundle small { color: var(--muted); font-size: .53rem; letter-spacing: .06em; }
+.summary { margin: 17px 0 0; color: #b0b4bf; font-size: .78rem; }
+.noIcon { display: grid; place-items: center; width: 35px; height: 35px; margin-top: 20px; border: 1px solid #a85450; border-radius: 50%; color: var(--danger); font-size: 1.4rem; }
+.impossible h2 { max-width: 380px; font-size: 1.3rem; }
+.impossible p { max-width: 380px; color: #c3a3a0; font-size: .85rem; line-height: 1.55; }

@@ -1,5 +1,6 @@
+import { getRewatchOrder, wouldCreateCycle } from "../algorithms/graph.js";
 import type { MoviesRepository } from "../repositories/movies.repository.js";
-import type { CreateMovieInput, Movie, UpdateMovieInput } from "../types/movie.js";
+import type { CreateMovieInput, Movie, RewatchOrder, UpdateMovieInput } from "../types/movie.js";
 import { AppError } from "../utils/AppError.js";
 
 export class MoviesService {
@@ -11,8 +12,8 @@ export class MoviesService {
 
   create(input: CreateMovieInput): Movie {
     this.ensureUniqueTitle(input.title);
+    this.ensureNoCycle(this.movies.nextMovieId(), input.prerequisiteIds ?? []);
     this.ensurePrerequisitesExist(input.prerequisiteIds ?? []);
-    // TODO(cycle-check): Add prerequisite cycle validation here before persistence.
     try {
       return this.movies.create(input);
     } catch (error) {
@@ -26,11 +27,8 @@ export class MoviesService {
     if (!existing) throw new AppError(404, "MOVIE_NOT_FOUND", `Movie ${id} was not found`);
     if (input.title !== undefined) this.ensureUniqueTitle(input.title, id);
     if (input.prerequisiteIds !== undefined) {
-      if (input.prerequisiteIds.includes(id)) {
-        throw new AppError(400, "SELF_PREREQUISITE", "A movie cannot be its own prerequisite");
-      }
       this.ensurePrerequisitesExist(input.prerequisiteIds);
-      // TODO(cycle-check): Validate proposed prerequisite changes for cycles here.
+      this.ensureNoCycle(id, input.prerequisiteIds);
     }
     try {
       return this.movies.update(id, input);
@@ -38,6 +36,27 @@ export class MoviesService {
       this.rethrowDuplicateTitle(error);
       throw error;
     }
+  }
+
+  getMovieRewatchOrder(id: number): RewatchOrder {
+    const target = this.movies.findById(id);
+    if (!target) throw new AppError(404, "MOVIE_NOT_FOUND", `Movie ${id} was not found`);
+
+    const orderedIds = getRewatchOrder(id, this.movies.getPrerequisiteGraph());
+    const moviesById = new Map(this.movies.findAll().map((movie) => [movie.id, movie]));
+    const order = orderedIds.flatMap((movieId) => {
+      const movie = moviesById.get(movieId);
+      return movie ? [movie] : [];
+    });
+    const unwatchedMovies = order.filter((movie) => !movie.watched);
+
+    return {
+      target: { id: target.id, title: target.title },
+      order,
+      watchedCount: order.length - unwatchedMovies.length,
+      totalCount: order.length,
+      remainingRuntimeMinutes: unwatchedMovies.reduce((total, movie) => total + movie.runtimeMinutes, 0),
+    };
   }
 
   private ensureUniqueTitle(title: string, exceptId?: number): void {
@@ -50,6 +69,12 @@ export class MoviesService {
   private ensurePrerequisitesExist(ids: number[]): void {
     if (!this.movies.prerequisitesExist(ids)) {
       throw new AppError(400, "PREREQUISITE_NOT_FOUND", "One or more prerequisite movies do not exist");
+    }
+  }
+
+  private ensureNoCycle(movieId: number, prerequisiteIds: number[]): void {
+    if (wouldCreateCycle(movieId, prerequisiteIds, this.movies.getPrerequisiteGraph())) {
+      throw new AppError(409, "CIRCULAR_DEPENDENCY", "These prerequisites would create a circular dependency");
     }
   }
 

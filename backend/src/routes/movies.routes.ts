@@ -29,6 +29,7 @@ export const createMoviesRouter = (service: MoviesService): Router => {
   const controller = createMoviesController(service);
   router.post("/", validateBody(createSchema), controller.create);
   router.get("/", controller.list);
+  router.get("/:id/rewatch-order", controller.getRewatchOrder);
   router.patch("/:id", validateBody(updateSchema), controller.update);
   return router;
 };

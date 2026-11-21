@@ -1,0 +1,11 @@
+.card { height: fit-content; }
+.heading { margin-bottom: 21px; }
+.kicker { color: var(--accent); font-size: .65rem; font-weight: 700; letter-spacing: .15em; }
+.heading h2 { margin: 7px 0 5px; font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; }
+.heading p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.5; }
+.form { display: grid; gap: 17px; }
+.field { display: grid; grid-template-columns: 1fr auto; gap: 8px; color: #d9d9dc; font-size: .82rem; font-weight: 600; }
+.field select, .field input { grid-column: 1 / -1; width: 100%; min-width: 0; height: 46px; border: 1px solid var(--line); border-radius: 11px; padding: 0 12px; color: var(--text); background: #12141a; outline: none; }
+.field select:focus, .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #e9a84b1a; }
+.field select:disabled { color: #777d88; cursor: not-allowed; }
+.unit { color: var(--muted); font-size: .62rem; font-weight: 400; letter-spacing: .08em; }

@@ -1,0 +1,26 @@
+.card { min-width: 0; }
+.header { display: flex; align-items: end; justify-content: space-between; gap: 14px; border-bottom: 1px solid #ffffff10; padding-bottom: 17px; }
+.kicker { color: var(--accent); font-size: .63rem; font-weight: 700; letter-spacing: .14em; }
+.header h2 { margin: 6px 0 0; font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; }
+.tag { border: 1px solid var(--line); border-radius: 7px; padding: 6px 8px; color: var(--muted); font-size: .56rem; letter-spacing: .06em; }
+.list { list-style: none; margin: 0; padding: 0; }
+.row { display: grid; grid-template-columns: 28px 24px minmax(0, 1fr) auto; align-items: center; gap: 13px; border-bottom: 1px solid #ffffff0d; padding: 16px 2px; }
+.row:last-child { border-bottom: 0; padding-bottom: 2px; }
+.index { color: #757a88; font-family: "Space Grotesk", sans-serif; font-size: .76rem; }
+.checkbox { position: relative; display: grid; place-items: center; width: 22px; height: 22px; cursor: pointer; }
+.checkbox input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.checkmark { display: grid; place-items: center; width: 20px; height: 20px; border: 1px solid #595e6b; border-radius: 6px; color: transparent; font-size: .7rem; }
+.checkbox input:checked + .checkmark { border-color: var(--success); color: #0f201a; background: var(--success); }
+.checkbox input:focus-visible + .checkmark { outline: 2px solid var(--accent); outline-offset: 2px; }
+.titleBlock { display: grid; gap: 4px; min-width: 0; }
+.titleBlock strong { overflow-wrap: anywhere; font-size: .89rem; font-weight: 600; }
+.titleBlock small { color: var(--muted); font-size: .7rem; }
+.titleBlock i { color: var(--accent); font-style: normal; }
+.done { color: #a4a9b4; text-decoration: line-through; text-decoration-color: #6c7280; }
+.status { color: #8e929e; font-size: .57rem; letter-spacing: .08em; white-space: nowrap; }
+.statusDone { color: var(--success); }
+.empty { display: grid; justify-items: center; padding: 46px 12px; text-align: center; }
+.empty > span { color: var(--success); font-size: 1.5rem; }
+.empty strong { margin-top: 10px; font-family: "Space Grotesk", sans-serif; }
+.empty p { margin: 5px 0 0; color: var(--muted); font-size: .82rem; }
+@media (max-width: 550px) { .row { grid-template-columns: 23px 22px minmax(0, 1fr); gap: 9px; } .status { display: none; } .tag { font-size: .5rem; } }

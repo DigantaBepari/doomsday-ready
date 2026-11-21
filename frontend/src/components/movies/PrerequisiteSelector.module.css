@@ -1,0 +1,6 @@
+.field { display: grid; gap: 8px; }
+.field label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px; color: #d9d9dc; font-size: .82rem; font-weight: 600; }
+.field label span, .field small { color: var(--muted); font-size: .67rem; font-weight: 400; letter-spacing: .04em; }
+.field select { width: 100%; min-height: 77px; border: 1px solid var(--line); border-radius: 11px; padding: 7px; color: var(--text); background: #12141a; }
+.field select:focus { outline: 2px solid #e9a84b70; border-color: var(--accent); }
+.field option { border-radius: 6px; padding: 5px 8px; }

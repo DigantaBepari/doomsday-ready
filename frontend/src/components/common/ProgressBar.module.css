@@ -1,0 +1,4 @@
+.wrapper { display: flex; align-items: center; gap: 12px; }
+.track { width: 100%; height: 9px; overflow: hidden; border-radius: 99px; background: #30333d; }
+.fill { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d78b35, #f8cb72); transition: width .35s ease; }
+.percent { min-width: 38px; color: var(--muted); font-size: .78rem; text-align: right; }

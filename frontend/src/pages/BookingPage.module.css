@@ -1,0 +1,15 @@
+.page { display: grid; gap: 25px; }
+.intro { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+.eyebrow { color: var(--accent); font-size: .66rem; font-weight: 700; letter-spacing: .15em; }
+.intro h1 { margin: 10px 0 7px; font-family: "Space Grotesk", sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -.055em; line-height: 1.07; }
+.intro h1 em { color: var(--accent-bright); font-style: normal; }
+.intro p { margin: 0; color: var(--muted); line-height: 1.6; }
+.ticket { display: grid; justify-items: center; align-content: center; width: 70px; height: 78px; border: 1px dashed #8e713e; border-radius: 12px; color: var(--muted); font-size: .58rem; letter-spacing: .16em; line-height: 1.5; transform: rotate(4deg); }
+.ticket b { color: var(--accent-bright); font-family: "Space Grotesk", sans-serif; font-size: .85rem; }
+.bookingGrid { display: grid; grid-template-columns: minmax(290px, .86fr) minmax(0, 1.3fr); align-items: stretch; gap: 18px; }
+.addCinema { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(300px, 1.2fr); align-items: start; gap: 18px; margin-top: 10px; }
+.sectionTitle { padding-top: 19px; }
+.sectionTitle h2 { margin: 9px 0 0; font-family: "Space Grotesk", sans-serif; font-size: 1.45rem; }
+.emptyNote { border: 1px dashed #56504a; border-radius: 13px; padding: 14px 17px; color: #d1bd9a; background: #e9a84b0a; font-size: .84rem; }
+@media (max-width: 850px) { .bookingGrid, .addCinema { grid-template-columns: 1fr; } .sectionTitle { padding-top: 0; } }
+@media (max-width: 500px) { .ticket { display: none; } }

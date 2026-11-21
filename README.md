@@ -1,7 +1,7 @@
 
 # Doomsday Ready
 
-Backend starter for a Marvel Cinematic Universe rewatch planner and cinema watch-party app. The current API includes movie management and health checks. Cinema endpoints, frontend work, rewatch ordering, and prerequisite cycle detection are intentionally deferred.
+Full-stack Marvel Cinematic Universe rewatch planner and cinema watch-party app. The API includes movie prerequisites, rewatch ordering, cinema bundle booking, and health checks.
 
 ## Requirements
 
@@ -23,12 +23,23 @@ In PowerShell, replace `cp` with `Copy-Item .env.example .env`.
 
 The API listens on `http://localhost:3000` by default. SQLite creates the configured database file and schema on startup. Set `DATABASE_PATH=:memory:` to use an in-memory database. `CLIENT_ORIGIN` controls the single allowed CORS origin.
 
+In a second terminal, start the frontend:
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+
+Vite serves the app locally and proxies `/api` requests to the backend at `http://localhost:3000`.
+
 ## Scripts
 
 - `npm run dev` — run the API with TypeScript watch mode
-- `npm run build` — compile TypeScript into `backend/dist/`
+- `npm run build` — compile TypeScript into `dist/`
 - `npm start` — run the compiled API
 - `npm test` — run Vitest tests
+- `npm run seed` — insert sample MCU movies and cinemas, skipping existing titles and names
 
 ## API
 
@@ -36,6 +47,10 @@ The API listens on `http://localhost:3000` by default. SQLite creates the config
 - `GET /api/movies` — list movies
 - `POST /api/movies` — create a movie
 - `PATCH /api/movies/:id` — update supplied movie fields
+- `GET /api/movies/:id/rewatch-order` — get prerequisite movies in viewing order
+- `GET /api/cinemas` — list cinemas and bundle sizes
+- `POST /api/cinemas` — create a cinema with bundle sizes
+- `GET /api/cinemas/:id/booking?groupSize=N` — find the fewest bundles for a group
 
 Movie fields use camelCase in JSON: `title`, `releaseYear`, `runtimeMinutes`, `watched`, and `prerequisiteIds`. Create requires `title` and `runtimeMinutes`; runtime must be 1–300 minutes. The response includes `prerequisiteIds` as an array. Errors use `{ "error": { "code": "...", "message": "..." } }`.
 
