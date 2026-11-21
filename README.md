@@ -166,5 +166,3 @@ The supported bounds (`G ≤ 10,000`, `B ≤ 10`) keep this calculation small.
 ## How I used AI tools
 
 Codex was used to scaffold the project and generate code and tests. I reviewed, ran, and tested the resulting work myself.
-
-**Personal notes:** _Add your notes here._
